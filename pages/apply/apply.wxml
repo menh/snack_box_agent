@@ -1,0 +1,21 @@
+<view class='page'>
+  <view class='edit-input-item'>
+    <view class="edit-input-item-title">你的名字</view>
+    <input class="edit-input-item-operation" name="input" placeholder="你的名字" value='{{school.schoolName}}' data-name='schoolName'  bindinput="editInputChange"></input>
+  </view>
+  <view class='edit-input-item'>
+    <view class="edit-input-item-title">你的手机</view>
+    <input class="edit-input-item-operation" name="input" placeholder="你的手机" value='{{school.schoolName}}' data-name='schoolName'  bindinput="editInputChange"></input>
+  </view>
+  <view class='edit-input-item'>
+    <view class="edit-input-item-title">你的代理地址</view>
+    <input class="edit-input-item-operation" name="input" placeholder="你的代理地址" value='{{school.schoolName}}' data-name='schoolName'  bindinput="editInputChange"></input>
+  </view>
+  <view class='edit-input-item'>
+    <view class="edit-input-item-title">备注</view>
+    <input class="edit-input-item-operation" name="input" placeholder="备注" value='{{school.schoolName}}' data-name='schoolName'  bindinput="editInputChange"></input>
+  </view>
+
+  
+  <button class="edit-submit" type="primary" bindtap='editSubmit'>提交</button>
+</view>

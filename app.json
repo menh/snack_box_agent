@@ -1,0 +1,16 @@
+{
+  "pages":[
+    "pages/hello/hello",
+    "pages/logistics/shop/shop",
+    "pages/logistics/orderSure/orderSure",
+    "pages/apply/apply",
+    "pages/logistics/home/home"
+  ],
+  "window": {
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#267BD9",
+    "navigationBarTitleText": "宅宅快乐盒",
+    "navigationBarTextStyle": "white",
+    "enablePullDownRefresh": true
+  }
+}
