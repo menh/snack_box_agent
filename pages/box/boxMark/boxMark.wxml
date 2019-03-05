@@ -1,0 +1,14 @@
+<!--pages/box/boxMark/boxMark.wxml-->
+<view class='page'>
+<view style='height:15rpx;'></view>
+  <view wx:for="{{applys}}" wx:key="{{index}}">
+    <view wx:if="{{item.mark!=''}}">
+      <view style='height:20rpx;'></view>
+      <view class='item-information-content big-text my-apply-day'>{{item.applyTimeDay}}</view>
+      <view style='height:10rpx;'></view>
+      <view class='item more-padding'>
+        <text class='my-apply-mark black'>{{item.mark}}</text>
+      </view>
+    </view>
+  </view>
+</view>

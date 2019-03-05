@@ -13,7 +13,7 @@
       <view wx:for="{{cates}}" wx:key="{{index}}">
         <view class="block-text" id="category_{{index}}">{{item.category.categoryName}}</view>
         <view wx:for="{{item.good}}" wx:for-item="good" wx:key="{{index}}">
-          <view class='item good-item more-padding category-item'>
+          <view class='item good-item more-padding belong-category'>
             <view style='width:20rpx;'></view>
             <image class='item-introduce-image' src='{{good.goodPic}}' lazy-load='true'></image>
             <view style='width:20rpx;'></view>

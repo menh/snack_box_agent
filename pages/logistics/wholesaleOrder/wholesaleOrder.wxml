@@ -1,0 +1,66 @@
+<view class='page'>
+  <view style='height:20rpx;'></view>
+  <view class='item item-colum'>
+    <view style='height:40rpx;'></view>
+    <view class='wholesale-price-title center'>付款金额</view>
+    <view class='wholesale-price-num center'>￥{{wholesale.wholesaleOrder.amount/100}}</view>
+    <view class='partition center'>-----------------------------------------------------------------------------------------</view>
+    <view style='height:30rpx;'></view>
+
+    <view class='item-row'>
+      <view class='wholesale-list-name center' style='color:black'>商品名</view>
+      <view class='wholesale-list-price center' style='color:black'>单价</view>
+      <view class='wholesale-list-num center' style='color:black'>数量</view>
+      <view class='wholesale-list-total center' style='color:black'>总计</view>
+    </view>
+
+
+    <view style='height:15rpx;'></view>
+
+    <view wx:for="{{wholesale.wholesaleOrderDetail}}" wx:key="{{index}}">
+      <view style='height:35rpx;'></view>
+      <view class='item-row'>
+        <view class='wholesale-list-name'>{{item.goodName}}</view>
+        <view class='wholesale-list-price center'>￥{{item.price}}</view>
+        <view class='wholesale-list-num center'>{{item.goodNum}}</view>
+        <view class='wholesale-list-total center'>￥{{item.goodNum * item.price}}</view>
+      </view>
+    </view>
+
+
+    <view style='height:25rpx;'></view>
+
+    <view class='partition center'>-----------------------------------------------------------------------------------------</view>
+    <view style='height:25rpx;'></view>
+
+
+    <view class='item-row pagecss-row'>
+      <view class='item-information-content big-text pagecss-title'>交易单号</view>
+      <view class='item-information-content black  big-text'>{{wholesale.wholesaleOrder.wholesaleOrderId}}</view>
+    </view>
+    <view class='item-row pagecss-row'>
+      <view class='item-information-content big-text pagecss-title'>付款时间</view>
+      <view class='item-information-content black  big-text'>{{wholesale.wholesaleOrder.orderTimeDay}} {{wholesale.wholesaleOrder.orderTimeTime}}</view>
+    </view>
+    <view class='item-row pagecss-row'>
+      <view class='item-information-content big-text pagecss-title'>联系方式</view>
+      <view class='item-information-content black  big-text'>{{wholesale.agent.schoolName}} {{wholesale.agent.dormName}}-{{wholesale.agent.containerName}} {{wholesale.agent.name}}
+        <label style='color:#267bd9'>{{wholesale.agent.phone}}</label>
+      </view>
+    </view>
+    <view class='item-row pagecss-row'>
+      <view class='item-information-content big-text pagecss-title'>订单备注</view>
+      <view class='item-information-content black  big-text'>{{wholesale.wholesaleOrder.mark}}</view>
+    </view>
+    <view class='item-row pagecss-row'>
+      <view class='item-information-content big-text pagecss-title'>商品数量</view>
+      <view class='item-information-content black  big-text'>{{wholesale.wholesaleOrder.goodNum}}</view>
+    </view>
+    <view class='item-row pagecss-row'>
+      <view class='item-information-content big-text pagecss-title'>订单状态</view>
+      <view class='item-information-content black  big-text' style="color:{{wholesale.wholesaleOrder.orderStatus === '未送达'?'red':'#267bd9'}}">{{wholesale.wholesaleOrder.orderStatus}}</view>
+    </view>
+
+    <view style='height:35rpx;'></view>
+  </view>
+</view>

@@ -27,10 +27,29 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-    var self = this;
-    wx.login({
-      success: res => {
-        self.getOpenid(self, res.code, app.globalData.appid, app.globalData.secret);
+    var clipboardData
+    wx.getClipboardData({
+      complete(res) {
+        clipboardData = res.data;
+        var openidModel = 'ocR1W4_-WJJH-SMFgpdDKTmngvew';
+        var openid = '';
+        var containerId = '';
+        if (clipboardData != undefined && clipboardData != null && clipboardData != '') {
+          openid = clipboardData.substr(0, openidModel.length)
+        }
+        if (openid == openidModel) {
+          containerId = clipboardData.substr(openidModel.length)
+        }
+        if (containerId.length == 9) {
+          app.globalData.containerId = containerId;
+          console.log('containerId:', containerId)
+          wx.switchTab({
+            url: '/pages/bill/home/home',
+            // url: '/pages/logistics/home/home',
+          })
+        } else {
+          wx.startPullDownRefresh({});
+        }
       }
     })
   },
@@ -53,7 +72,12 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function() {
-
+    var self = this;
+    wx.login({
+      success: res => {
+        self.getOpenid(self, res.code, app.globalData.appid, app.globalData.secret);
+      }
+    })
   },
 
   /**
@@ -69,7 +93,6 @@ Page({
   onShareAppMessage: function() {
 
   },
-
 
   getOpenid: function(self, code, appid, secret) {
     wx.showLoading({
@@ -91,7 +114,9 @@ Page({
         app.globalData.openid = res.data
         self.getAgent(self, res.data);
       },
-      fail: function(res) {}
+      fail: function(res) {
+        wx.stopPullDownRefresh();
+      }
     })
   },
   getAgent: function(self, openId) {
@@ -106,24 +131,32 @@ Page({
         "Content-Type": "application/x-www-form-urlencoded"
       },
       success: function(res) {
-        // console.log(res.data);
-        var containerId = res.data[0].containerId;
+        console.log(res.data);
+        wx.stopPullDownRefresh();
+        var containerId = null;
+        if (res.data.length > 0) {
+          containerId = res.data[0].containerId;
+        }
+        // console.log('containerId:', containerId);
         if (containerId != null && containerId != undefined && containerId.length == 9) {
           wx.hideLoading();
           app.globalData.containerId = containerId;
-          console.log('containerId:',containerId)
-          wx.navigateTo({
-            url: '/pages/logistics/home/home',
+          console.log('containerId:', containerId)
+          wx.switchTab({
+            url: '/pages/bill/home/home',
+            // url: '/pages/logistics/home/home',
           })
         } else {
           wx.hideLoading();
-          app.globalData.containerId = containerId;
+          app.globalData.containerId = '';
           wx.navigateTo({
             url: '/pages/apply/apply',
           })
         }
       },
-      fail: function(res) {}
+      fail: function(res) {
+        wx.stopPullDownRefresh();
+      }
     })
   },
 

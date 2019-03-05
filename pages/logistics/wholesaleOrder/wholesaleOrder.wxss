@@ -1,0 +1,31 @@
+.pagecss-title{
+  margin-left: 40rpx;
+  margin-right: 50rpx;
+}
+
+.pagecss-row{
+  width: 100%;
+  margin-bottom: 15rpx;
+}
+
+.item{
+  width: 710rpx;
+  margin:0rpx auto;
+  border-radius: 15rpx;
+}
+
+.wholesale-list-name{
+  width: 240rpx;
+}
+
+.wholesale-list-price{
+  width: 140rpx;
+}
+
+.wholesale-list-num{
+  width: 140rpx;
+}
+
+.wholesale-list-total{
+  width: 140rpx;
+}

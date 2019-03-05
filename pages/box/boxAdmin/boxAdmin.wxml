@@ -1,0 +1,186 @@
+<view class='page'>
+
+  <view class='data'>
+    <view class='data-item'>
+      <view class='data-item-num'>{{info.boxNum}}</view>
+      <view class='data-item-title'>盒子数量</view>
+    </view>
+    <view class='data-item'>
+      <view class='data-item-num'>{{info.goodsNum}}</view>
+      <view class='data-item-title'>初始件数</view>
+    </view>
+    <view class='data-item'>
+      <view class='data-item-num'>{{info.residualNum}}</view>
+      <view class='data-item-title'>剩余件数</view>
+    </view>
+    <view class='data-item'>
+      <view class='data-item-num'>{{info.sellRadio}}</view>
+      <view class='data-item-title'>消费比例</view>
+    </view>
+  </view>
+
+  <view style='height:5rpx;'></view>
+
+  <view class='operation'>
+    <!-- <view class='operation-item' data-url='/pages/box/boxSearch/boxSearch' bindtap='navigate'>
+      <image class='operation-item-image' src='/image/operation/search.png'></image>
+      <view class='operation-item-title'>查找盒子</view>
+    </view> -->
+    <view class='operation-item' data-url='/pages/box/boxEdit/boxEdit?isEdit=false&containerId={{containerId}}&interfaceName=AddBox.do' bindtap='navigate'>
+      <image class='operation-item-image' src='/image/operation/add.png'></image>
+      <view class='operation-item-title'>添加盒子</view>
+    </view>
+    <view class='operation-item' data-url='/pages/box/boxStructNoEdit/boxStructNoEdit?getInterfaceName=SelDefaultGoodStructDetail.do&title=新盒子商品结构' bindtap='navigate'>
+      <image class='operation-item-image' src='/image/operation/goodCart2.png'></image>
+      <view class='operation-item-title'>查看默认商品</view>
+    </view>
+  </view>
+  <view style='height:5rpx'></view>
+
+  <view class='category'>
+    <view class="category-item {{boxType==='all'?'text-strong':''}}" data-category='all' catchtap='tapCategory'>全部盒子</view>
+    <view class="category-item" data-category='pending' catchtap='tapCategory'>
+      <view class="my-category">
+        <view class=" {{boxType==='pending'?'text-strong':''}}">待处理</view>
+        <view style='width:10rpx;'></view>
+        <view class='my-pendingNum'>{{pendingNum}}</view>
+      </view>
+    </view>
+  </view>
+  <view style='height:5rpx'></view>
+  <view wx:if="{{boxType==='all'}}">
+    <view class='sort'>
+      <view class="sort-item {{sortBox==='box'?'text-strong':''}}" data-sort='box' catchtap='tapSort'>盒子</view>
+      <view class="sort-item {{sortBox==='room'?'text-strong':''}}" data-sort='room' catchtap='tapSort'>房间</view>
+      <view class="sort-item {{sortBox==='proportion'?'text-strong':''}}" data-sort='proportion' catchtap='tapSort'>比例</view>
+      <view class="sort-item {{sortBox==='surplus'?'text-strong':''}}" data-sort='surplus' catchtap='tapSort'>剩余</view>
+      <view class="sort-item {{sortBox==='time'?'text-strong':''}}" data-sort='time' catchtap='tapSort'>时间</view>
+    </view>
+    <view style='height:5rpx'></view>
+    <view wx:for="{{boxs}}" wx:key="{{index}}">
+      <view class='item  more-padding belong-category' data-url='/pages/box/boxDetail/boxDetail?boxId={{item.boxId}}' bindtap='navigate'>
+        <view style='width:20rpx;'></view>
+        <image wx:if="{{item.state==='申请补货已确认'}}" class='item-introduce-image' src='/image/icon/boxApply.png'></image>
+        <image wx:if="{{item.state==='建议补货'}}" class='item-introduce-image' src='/image/icon/boxDevice.png'></image>
+        <image wx:if="{{item.state==='沉默'}}" class='item-introduce-image' src='/image/icon/boxSilent.png'></image>
+        <image wx:if="{{item.state==='正常'||item.state==='申请补货'}}" class='item-introduce-image' src='/image/icon/box.png'></image>
+
+        <!-- <image class='item-introduce-image' src='/image/icon/box.png'></image> -->
+        <view style='width:20rpx;'></view>
+        <view class='item-information'>
+          <view class='item-information-content text-strong'>{{item.boxId}}</view>
+          <view class='item-information-content'>{{item.sex}} {{item.grade}}</view>
+          <view class='item-information-content'>{{item.schoolName}}</view>
+          <view class='item-information-content text-strong'>{{item.dormName}}-{{item.containerName}} {{item.room}}</view>
+        </view>
+        <view class='item-colum'>
+
+          <view class='item-row'>
+            <view class='item-data'>
+              <view class='item-data-num'>{{item.goodsNum}}</view>
+              <view class='item-data-title'>初始件数</view>
+            </view>
+            <view class='item-data'>
+              <view class='item-data-num'>{{item.sellNum}}</view>
+              <view class='item-data-title'>消费件数</view>
+            </view>
+            <view class='item-data'>
+              <view class='item-data-num'>{{item.residualNum}}</view>
+              <view class='item-data-title'>剩余件数</view>
+            </view>
+            <view class='item-data'>
+              <view class='item-data-num text-strong'>{{item.sellRatio}}</view>
+              <view class='item-data-title'>消费比例</view>
+            </view>
+          </view>
+          <view class='item-row'>
+            <view class='item-date'>
+              <view class='item-date-day'>{{item.attendDateDay}}</view>
+              <view class='item-date-time'>{{item.attendDateTime}}</view>
+              <view class='item-date-title'>加入时间</view>
+            </view>
+            <view class='item-date'>
+              <view class='item-date-day'>{{item.visitDateDay}}</view>
+              <view class='item-date-time'>{{item.visitDateTime}}</view>
+              <view class='item-date-title'>回访时间</view>
+            </view>
+            <view class='item-date'>
+              <view class='item-date-day'>{{item.lastSuppleDateDay}}</view>
+              <view class='item-date-time'>{{item.lastSuppleDateTime}}</view>
+              <view class='item-date-title'>补货时间</view>
+            </view>
+            <view class='item-date'>
+              <view class='item-date-day text-strong'>{{item.lastPurchaseDateDay}}</view>
+              <view class='item-date-time text-strong'>{{item.lastPurchaseDateTime}}</view>
+              <view class='item-date-title'>消费时间</view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view wx:if="{{boxType==='pending'}}">
+    <view style='height:5rpx'></view>
+    <view wx:for="{{boxsPending}}" wx:key="{{index}}">
+      <view class='item more-padding belong-category' data-url='/pages/box/boxDetail/boxDetail?boxId={{item.boxId}}' bindtap='navigate'>
+        <view style='width:20rpx;'></view>
+        <image wx:if="{{item.state==='申请补货已确认'}}" class='item-introduce-image' src='/image/icon/boxApply.png'></image>
+        <image wx:if="{{item.state==='建议补货'}}" class='item-introduce-image' src='/image/icon/boxDevice.png'></image>
+        <image wx:if="{{item.state==='沉默'}}" class='item-introduce-image' src='/image/icon/boxSilent.png'></image>
+        <image wx:if="{{item.state==='正常'||item.state==='申请补货'}}" class='item-introduce-image' src='/image/icon/box.png'></image>
+        <view style='width:20rpx;'></view>
+        <view class='item-information'>
+          <view class='item-information-content text-strong'>{{item.boxId}}</view>
+          <view class='item-information-content'>{{item.sex}} {{item.grade}}</view>
+          <view class='item-information-content'>{{item.schoolName}}</view>
+          <view class='item-information-content text-strong'>{{item.dormName}}-{{item.containerName}} {{item.room}}</view>
+        </view>
+        <view class='item-colum'>
+
+          <view class='item-row'>
+            <view class='item-data'>
+              <view class='item-data-num'>{{item.goodsNum}}</view>
+              <view class='item-data-title'>初始件数</view>
+            </view>
+            <view class='item-data'>
+              <view class='item-data-num'>{{item.sellNum}}</view>
+              <view class='item-data-title'>消费件数</view>
+            </view>
+            <view class='item-data'>
+              <view class='item-data-num'>{{item.residualNum}}</view>
+              <view class='item-data-title'>剩余件数</view>
+            </view>
+            <view class='item-data'>
+              <view class='item-data-num text-strong'>{{item.sellRatio}}</view>
+              <view class='item-data-title'>消费比例</view>
+            </view>
+          </view>
+          <view class='item-row'>
+            <view class='item-date'>
+              <view class='item-date-day'>{{item.attendDateDay}}</view>
+              <view class='item-date-time'>{{item.attendDateTime}}</view>
+              <view class='item-date-title'>加入时间</view>
+            </view>
+            <view class='item-date'>
+              <view class='item-date-day'>{{item.visitDateDay}}</view>
+              <view class='item-date-time'>{{item.visitDateTime}}</view>
+              <view class='item-date-title'>回访时间</view>
+            </view>
+            <view class='item-date'>
+              <view class='item-date-day'>{{item.lastSuppleDateDay}}</view>
+              <view class='item-date-time'>{{item.lastSuppleDateTime}}</view>
+              <view class='item-date-title'>补货时间</view>
+            </view>
+            <view class='item-date'>
+              <view class='item-date-day text-strong'>{{item.lastPurchaseDateDay}}</view>
+              <view class='item-date-time text-strong'>{{item.lastPurchaseDateTime}}</view>
+              <view class='item-date-title'>消费时间</view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+</view>

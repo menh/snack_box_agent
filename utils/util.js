@@ -1,4 +1,5 @@
-var getDayFromDate = function (date) {
+const app = getApp();
+var getDayFromDate = function(date) {
   var day = '';
   if (date == null || date.length < 8) {
     return day;
@@ -10,7 +11,7 @@ var getDayFromDate = function (date) {
   return day;
 }
 
-var getTimeFromDate = function (date) {
+var getTimeFromDate = function(date) {
   var time = '';
   if (date == null || date.length < 14) {
     return time;
@@ -23,7 +24,7 @@ var getTimeFromDate = function (date) {
   return time;
 }
 
-var date2String = function (date) {
+var date2String = function(date) {
   var year = formatNumber(date.getFullYear()); //获取完整的年份(4位,1970-????)
   var month = formatNumber(date.getMonth() + 1); //获取当前月份(0-11,0代表1月)
   var day = formatNumber(date.getDate()); //获取当前日(1-31)
@@ -33,7 +34,7 @@ var date2String = function (date) {
   return year + month + day + hour + minutes + seconds;
 }
 
-var getDateArrayByDate = function (date) {
+var getDateArrayByDate = function(date) {
   var year = date.getFullYear(); //获取完整的年份(4位,1970-????)
   var month = date.getMonth() + 1; //获取当前月份(0-11,0代表1月)
   var day = date.getDate(); //获取当前日(1-31)
@@ -53,7 +54,7 @@ var dateMultiArray = [
   ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34', '35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46', '47', '48', '49', '50', '51', '52', '53', '54', '55', '56', '57', '58', '59']
 ]
 
-var string2Date = function (date) {
+var string2Date = function(date) {
   var year = parseInt(date.substr(0, 4));
   var month = parseInt(date.substr(4, 2)) - 1;
   var day = parseInt(date.substr(6, 2));
@@ -64,11 +65,82 @@ var string2Date = function (date) {
 }
 
 
-var formatNumber = function (n) {
+var formatNumber = function(n) {
   n = n.toString()
   return n[1] ? n : '0' + n
 }
 
+var checkAgent = function(openId) {
+  var self = this;
+  var clipboardData
+  wx.getClipboardData({
+    complete(res) {
+      clipboardData = res.data;
+      var openidModel = 'ocR1W4_-WJJH-SMFgpdDKTmngvew';
+      var openid = '';
+      var containerId = '';
+      if (clipboardData != undefined && clipboardData != null && clipboardData != '') {
+        openid = clipboardData.substr(0, openidModel.length)
+      }
+      if (openid == openidModel) {
+        containerId = clipboardData.substr(openidModel.length)
+      }
+      if (containerId.length == 9) {
+        app.globalData.containerId = containerId;
+        console.log('containerId:', containerId)
+      } else {
+        wx.login({
+          success: res => {
+            wx.request({
+              url: app.globalData.serverIp + 'getWxOpenId.do',
+              method: 'POST',
+              data: {
+                code: res.code,
+                appid: app.globalData.appid,
+                secret: app.globalData.secret
+              },
+              header: {
+                "Content-Type": "application/x-www-form-urlencoded"
+              },
+              success: function (res) {
+                console.log("openid: " + res.data);
+                app.globalData.openid = res.data
+                
+                wx.request({
+                  url: app.globalData.serverIp + 'selAgent.do',
+                  method: 'POST',
+                  data: {
+                    openId: openId,
+                    conditionParam: 'openId'
+                  },
+                  header: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                  },
+                  success: function (res) {
+                    var containerId = res.data[0].containerId;
+                    console.log('翻页检测:', containerId)
+                    app.globalData.containerId = containerId;
+                    if (containerId == null || containerId == undefined || containerId.length != 9) {
+                      wx.reLaunch({
+                        url: '/pages/hello/hello',
+                      })
+                    }
+                  },
+                  fail: function (res) {
+                  }
+                })
+              },
+              fail: function (res) {
+              }
+            })
+          }
+        })
+      }
+    }
+  })
+
+  
+}
 
 module.exports = {
   getDayFromDate: getDayFromDate,
@@ -76,5 +148,6 @@ module.exports = {
   date2String: date2String,
   string2Date: string2Date,
   getDateArrayByDate: getDateArrayByDate,
-  dateMultiArray: dateMultiArray
+  dateMultiArray: dateMultiArray,
+  checkAgent: checkAgent
 }

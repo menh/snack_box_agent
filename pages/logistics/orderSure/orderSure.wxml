@@ -1,15 +1,15 @@
 <view style='height:40rpx;'>
 </view>
-<view class='price-title center'>付款金额</view>
-<view class='price-num center'>￥{{price/100}}</view>
-<view class='partition center'>-----------------------------------------------------------</view>
+<view class='wholesale-price-title center'>付款金额</view>
+<view class='wholesale-price-num center'>￥{{price/100}}</view>
+<view class='partition center'>-----------------------------------------------------------------------------------------</view>
 <view style='height:30rpx;'></view>
 
 <view class='item-row'>
-  <view class='data-name center' style='color:black'>商品名</view>
-  <view class='data-price center' style='color:black'>单价</view>
-  <view class='data-num center' style='color:black'>数量</view>
-  <view class='data-total center' style='color:black'>总计</view>
+  <view class='wholesale-list-name center' style='color:black'>商品名</view>
+  <view class='wholesale-list-price center' style='color:black'>单价</view>
+  <view class='wholesale-list-num center' style='color:black'>数量</view>
+  <view class='wholesale-list-total center' style='color:black'>总计</view>
 </view>
 
 
@@ -20,10 +20,10 @@
     <view wx:if="{{snack_item.commodityNum>0}}">
       <view style='height:35rpx;'></view>
       <view class='item-row'>
-        <view class='data-name'>{{snack_item.goodName}}</view>
-        <view class='data-price center'>￥{{snack_item.price/100}}</view>
-        <view class='data-num center'>{{snack_item.commodityNum}}</view>
-        <view class='data-total center'>￥{{snack_item.commodityNum * snack_item.price/100}}</view>
+        <view class='wholesale-list-name'>{{snack_item.goodName}}</view>
+        <view class='wholesale-list-price center'>￥{{snack_item.price/100}}</view>
+        <view class='wholesale-list-num center'>{{snack_item.commodityNum}}</view>
+        <view class='wholesale-list-total center'>￥{{snack_item.commodityNum * snack_item.price/100}}</view>
       </view>
     </view>
   </view>
@@ -32,15 +32,15 @@
 
 <view style='height:25rpx;'></view>
 
-<view class='partition center'>-----------------------------------------------------------</view>
+<view class='partition center'>-----------------------------------------------------------------------------------------</view>
 <view style='height:25rpx;'></view>
 
 
 <view class='edit-input-item'>
   <view class="edit-radio-item-title big-text">备注</view>
-  <input class="edit-input-item-operation input-mark" name="input" placeholder="选填" data-name='mark' bindinput="editInputChange"></input>
+  <input class="edit-input-item-operation2" name="input" placeholder="选填" data-name='mark' bindinput="editInputChange"></input>
 </view>
 
 
 <view style='height:70rpx;'></view>
-<view class="submit" bindtap='submit'>立即支付</view>
+<view class="submit-view" bindtap='submit'>立即支付</view>

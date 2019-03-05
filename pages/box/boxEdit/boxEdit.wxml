@@ -1,0 +1,54 @@
+<view class='page'>
+  <view class='edit-input-item'>
+    <view class="edit-input-item-title">盒子编号</view>
+    <input class="edit-input-item-operation"  wx:if="{{isEdit!='true'}}"  name="input"  type='number' placeholder="盒子编号" value='{{box.boxId}}' data-name='boxId' bindinput="editInputChange"></input>
+    <input class="edit-input-item-operation-disabled"  wx:if="{{isEdit=='true'}}" name="input" type='number' disabled='true'value='{{box.boxId}}'></input>
+  </view>
+
+  <view class='edit-input-item'>
+    <view class="edit-input-item-title">宿舍号</view>
+    <input class="edit-input-item-operation" name="input" placeholder="宿舍号" value='{{box.room}}' data-name='room' bindinput="editInputChange"></input>
+  </view>
+
+
+  <view class="edit-radio-item">
+    <view class="edit-radio-item-title">性别</view>
+    <radio-group class='edit-radio-item-operation' data-name='sex' name="radio" bindchange="editRadioChange">
+      <radio class='edit-radio-item-operation-radio' value="未知" checked="{{box.sex==='未知'?true:false}}">未知</radio>
+      <radio class='edit-radio-item-operation-radio' value="男" checked="{{box.sex==='男'?true:false}}">男</radio>
+      <radio class='edit-radio-item-operation-radio' value="女" checked="{{box.sex==='女'?true:false}}">女</radio>
+    </radio-group>
+  </view>
+
+  <view class="edit-picker-item">
+    <view class="edit-picker-item-title">年级</view>
+    <picker bindchange="editPickerChange"  data-name='grade' value="{{gradeMultiIndex}}" range="{{gradeMultiArray}}">
+      <view class="edit-picker-item-operation">
+        当前选择：{{gradeMultiArray[gradeMultiIndex[0]]}}
+      </view>
+    </picker>
+  </view>
+
+  
+  <view class="edit-picker-item">
+    <view class="edit-picker-item-title">加入时间</view>
+    <picker mode="multiSelector" bindchange="editPickerChange"  data-name='attendDate' value="{{attendDateMultiIndex}}" range="{{dateMultiArray}}">
+      <view class="edit-picker-item-operation">
+        当前选择：{{dateMultiArray[0][attendDateMultiIndex[0]]}}{{dateMultiArray[1][attendDateMultiIndex[1]]}}{{dateMultiArray[2][attendDateMultiIndex[2]]}} {{dateMultiArray[3][attendDateMultiIndex[3]]}}:{{dateMultiArray[4][attendDateMultiIndex[4]]}}:{{dateMultiArray[5][attendDateMultiIndex[5]]}}
+      </view>
+    </picker>
+  </view>
+
+  
+  <view class="edit-picker-item">
+    <view class="edit-picker-item-title">最后补货时间</view>
+    <picker mode="multiSelector" bindchange="editPickerChange"  data-name='lastSuppleDate' value="{{lastSuppleDateMultiIndex}}" range="{{dateMultiArray}}">
+      <view class="edit-picker-item-operation">
+        当前选择：{{dateMultiArray[0][lastSuppleDateMultiIndex[0]]}}{{dateMultiArray[1][lastSuppleDateMultiIndex[1]]}}{{dateMultiArray[2][lastSuppleDateMultiIndex[2]]}} {{dateMultiArray[3][lastSuppleDateMultiIndex[3]]}}:{{dateMultiArray[4][lastSuppleDateMultiIndex[4]]}}:{{dateMultiArray[5][lastSuppleDateMultiIndex[5]]}}
+      </view>
+    </picker>
+  </view>
+
+  <button  class="edit-submit" type="primary" bindtap='editSubmit'>提交</button>
+  <view style='height:30rpx;'></view>
+</view>

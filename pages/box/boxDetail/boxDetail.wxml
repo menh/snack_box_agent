@@ -1,0 +1,208 @@
+<!--pages/box/boxDetail/boxDetail.wxml-->
+<view class='page'>
+  <view class='item'>
+    <view style='width:20rpx;'></view>
+        <image wx:if="{{box.state==='申请补货已确认'}}" class='item-introduce-image' src='/image/icon/boxApply.png'></image>
+        <image wx:if="{{box.state==='建议补货'}}" class='item-introduce-image' src='/image/icon/boxDevice.png'></image>
+        <image wx:if="{{box.state==='沉默'}}" class='item-introduce-image' src='/image/icon/boxSilent.png'></image>
+        <image wx:if="{{box.state==='正常'||item.state==='申请补货'}}" class='item-introduce-image' src='/image/icon/box.png'></image>
+    <view style='width:20rpx;'></view>
+    <view class='item-information'>
+      <view class='item-information-content text-strong'>{{box.boxId}}</view>
+      <view class='item-information-content'>{{box.sex}} {{box.grade}}</view>
+      <view class='item-information-content'>{{box.schoolName}}</view>
+      <view class='item-information-content text-strong'>{{box.dormName}}-{{box.containerName}} {{box.room}}</view>
+    </view>
+    <view class='item-colum'>
+
+      <view class='item-row'>
+        <view class='item-data'>
+          <view class='item-data-num'>{{box.goodsNum}}</view>
+          <view class='item-data-title'>初始件数</view>
+        </view>
+        <view class='item-data'>
+          <view class='item-data-num'>{{box.sellNum}}</view>
+          <view class='item-data-title'>消费件数</view>
+        </view>
+        <view class='item-data'>
+          <view class='item-data-num'>{{box.residualNum}}</view>
+          <view class='item-data-title'>剩余件数</view>
+        </view>
+        <view class='item-data'>
+          <view class='item-data-num text-strong'>{{box.sellRatio}}</view>
+          <view class='item-data-title'>消费比例</view>
+        </view>
+      </view>
+      <view class='item-row'>
+        <view class='item-date'>
+          <view class='item-date-day'>{{box.attendDateDay}}</view>
+          <view class='item-date-time'>{{box.attendDateTime}}</view>
+          <view class='item-date-title'>加入时间</view>
+        </view>
+        <view class='item-date'>
+          <view class='item-date-day'>{{box.visitDateDay}}</view>
+          <view class='item-date-time'>{{box.visitDateTime}}</view>
+          <view class='item-date-title'>回访时间</view>
+        </view>
+        <view class='item-date'>
+          <view class='item-date-day'>{{box.lastSuppleDateDay}}</view>
+          <view class='item-date-time'>{{box.lastSuppleDateTime}}</view>
+          <view class='item-date-title'>补货时间</view>
+        </view>
+        <view class='item-date'>
+          <view class='item-date-day text-strong'>{{box.lastPurchaseDateDay}}</view>
+          <view class='item-date-time text-strong'>{{box.lastPurchaseDateTime}}</view>
+          <view class='item-date-title'>消费时间</view>
+        </view>
+      </view>
+    </view>
+
+  </view>
+
+
+
+  <view style='height:5rpx;'></view>
+
+  <view class='operation'>
+    <view class='operation-item' data-url='/pages/box/boxStruct/boxStruct?getInterfaceName=SelGoodStructByBoxId.do&setInterfaceName=UpdBoxGoodStructDetail.do&boxId={{box.boxId}}' bindtap='navigate'>
+      <image class='operation-item-image' src='/image/operation/goodCart2.png'></image>
+      <view class='operation-item-title'>修改盒子商品</view>
+    </view>
+    <view class='operation-item' data-url='/pages/box/boxEdit/boxEdit?isEdit=true&boxId={{box.boxId}}&interfaceName=updBox.do' bindtap='navigate'>
+      <image class='operation-item-image' src='/image/operation/edit.png'></image>
+      <view class='operation-item-title'>编辑</view>
+    </view>
+    <view class='operation-item' bindtap='tapDelBox'>
+      <image class='operation-item-image' src='/image/operation/delete.png'></image>
+      <view class='operation-item-title'>删除</view>
+    </view>
+  </view>
+
+  <view wx:if="{{box.state==='申请补货已确认'||box.state==='建议补货'}}" class='operation'>
+    <view class='operation-item' data-url='/pages/box/boxStruct/boxStruct?getInterfaceName=SelNextGoodStructDetail.do&setInterfaceName=UpdBoxNextGoodStructDetail.do&boxId={{box.boxId}}' bindtap='navigate'>
+      <image class='operation-item-image' src='/image/operation/openBox.png'></image>
+      <view class='operation-item-title'>配货</view>
+    </view>
+    <view  wx:if="{{box.state==='申请补货已确认'&&box.state!='建议补货'}}" class='operation-item' bindtap='call'>
+      <image class='operation-item-image' src='/image/operation/call.png'></image>
+      <view class='operation-item-title'>呼叫</view>
+    </view>
+    <view class='operation-item' bindtap='suplyBox'>
+      <image class='operation-item-image' src='/image/icon/box2.png'></image>
+      <view class='operation-item-title'>完成补货</view>
+    </view>
+  </view>
+
+  
+  <view wx:if="{{box.state==='沉默'}}" class='operation'>
+    <picker mode="multiSelector" data-name='visitDate' bindtap='setNowDate' bindchange="changeVisitDate" value="{{visitDateIndex}}" range="{{dateMultiArray}}">
+      <view class='operation-item' style='width:750rpx'>
+        <image class='operation-item-image' src='/image/operation/refreshInfo2.png'></image>
+        <view class='operation-item-title'>刷新回访时间</view>
+      </view>
+    </picker>
+  </view>
+
+  <view style='height:5rpx;'></view>
+
+
+  <view class='category'>
+    <view class="category-item {{category==='orders'?'text-strong':''}}" data-category='orders' catchtap='tapCategory'>本期订单</view>
+    <view class="category-item {{category==='structs'?'text-strong':''}}" data-category='structs' catchtap='tapCategory'>本期库存</view>
+    <view class="category-item {{category==='records'?'text-strong':''}}" data-category='records' catchtap='tapCategory'>补货记录</view>
+  </view>
+
+
+  <view style='height:5rpx;'></view>
+
+  <view wx:if="{{category === 'orders'}}">
+    <view wx:for="{{orders}}" wx:key="{{index}}">
+      <view class='item more-padding belong-category'>
+        <view style='width:20rpx;'></view>
+        <image class='item-introduce-image' src='{{item.goodPic}}'></image>
+        <view style='width:20rpx;'></view>
+        <view class='item-information' style='width:250rpx;'>
+          <view class='item-information-content big-text black'>{{item.goodName}}</view>
+          <view style='height:8rpx;'></view>
+          <view class='item-information-content big-text'>{{item.orderDateDay}} {{item.orderDateTime}}</view>
+        </view>
+        <view style='width:140rpx;'></view>
+        <view class='item-information' style='align-items:flex-end'>
+          <view class='item-information-content order-price-size black bold text-right'>{{item.price}}</view>
+          <view style='height:8rpx;'></view>
+          <view class='item-information-content big-text text-right'>{{item.openid}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+
+  <view wx:if="{{category === 'structs'}}">
+    <view wx:for="{{structs}}" wx:key="{{index}}">
+      <view class='item more-padding belong-category'>
+        <view style='width:20rpx;'></view>
+        <image class='item-introduce-image' src='{{item.goodPic}}'></image>
+        <view style='width:20rpx;'></view>
+        <view class='item-information' style='width:180rpx;'>
+          <view class='item-information-content big-text black' style='overflow:hidden'>{{item.goodName}}</view>
+          <view style='height:8rpx;'></view>
+          <view class='item-information-content big-text'>￥{{item.price}}/{{item.goodUnit}}</view>
+        </view>
+
+        <view class='item-row'>
+          <view class='item-data'>
+            <view class='item-data-num bold'>{{item.initGoodNum}}</view>
+            <view class='item-data-title'>初始件数</view>
+          </view>
+          <view class='item-data'>
+            <view class='item-data-num bold'>{{item.sellGoodNum}}</view>
+            <view class='item-data-title'>消费件数</view>
+          </view>
+          <view class='item-data'>
+            <view class='item-data-num text-strong'>{{item.remainGoodNum}}</view>
+            <view class='item-data-title'>剩余件数</view>
+          </view>
+        </view>
+        <view style='width:30rpx'></view>
+        <checkbox></checkbox>
+      </view>
+    </view>
+  </view>
+
+  <view wx:if="{{category === 'records'}}">
+    <view wx:for="{{records}}" wx:key="{{index}}">
+      <view class='item more-padding belong-category'>
+        <view style='width:20rpx;'></view>
+        <image class='item-introduce-image' src='/image/operation/openBox.png'></image>
+        <view style='width:20rpx;'></view>
+        <view class='item-row'>
+          <view class='item-date'>
+            <view class='item-date-day text-strong'>{{item.placeTimeDay}}</view>
+            <view class='item-date-time text-strong'>{{item.placeTimeTime}}</view>
+            <view class='item-date-title'>放入时间</view>
+          </view>
+          <view class='item-date'>
+            <view class='item-date-day text-strong'>{{item.changeTimeDay}}</view>
+            <view class='item-date-time text-strong'>{{item.changeTimeTime}}</view>
+            <view class='item-date-title'>更换时间</view>
+          </view>
+          <view class='item-data'>
+            <view class='item-data-num text-strong'>{{item.suplyNum}}</view>
+            <view class='item-data-title'>初始件数</view>
+          </view>
+          <view class='item-data'>
+            <view class='item-data-num text-strong '>{{item.saleNum}}</view>
+            <view class='item-data-title'>消费件数</view>
+          </view>
+          <view style='width:80rpx;'></view>
+          <view class='item-operation' data-id='{{item.boxSuplyLogId}}' bindtap='tapDeleteRecord'>
+            <image class='item-operation-image' src='/image/operation/delete.png'></image>
+            <view class='item-operation-title'>删除</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+
+</view>

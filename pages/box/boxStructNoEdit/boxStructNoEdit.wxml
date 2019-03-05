@@ -1,0 +1,57 @@
+<view class='page' style='display:flex'>
+  <view class='colum left'>
+    <view style='height:20rpx;'></view>
+    <view wx:for="{{category}}" wx:key="{{index}}">
+      <view wx:if="{{isEdit||item.isShow}}" class="left-title" data-id="category_{{index}}" data-index="{{index}}" catchtap='chooseCategory'>{{item.category.categoryName}}</view>
+    </view>
+  </view>
+
+
+  <view class='colum right'>
+
+    <scroll-view class='right-scroll' scroll-y='true' scroll-into-view="{{toCategory}}" scroll-with-animation='true'>
+
+      <view wx:for="{{category}}" wx:key="{{index}}">
+        <view wx:if="{{isEdit||item.isShow}}">
+
+          <view class="block-text" id="category_{{index}}">{{item.category.categoryName}}</view>
+
+          <view wx:for="{{item.good}}" wx:for-item="good" wx:key="{{index}}">
+
+            <view wx:if="{{isEdit||good.isShow}}" class='item good-item more-padding belong-category'>
+
+              <view style='width:20rpx;'></view>
+              <image class='item-introduce-image' src='{{good.goodPic}}' lazy-load='true'></image>
+              <view style='width:20rpx;'></view>
+
+              <view class='item-information' style='width:180rpx;'>
+                <view class='item-information-content big-text black' style='overflow:hidden'>{{good.goodName}}</view>
+                <view style='height:8rpx;'></view>
+                <view class='item-information-content big-text'>￥{{good.price/100}}/{{good.goodUnit}}</view>
+              </view>
+              <view class='item-row good-operation' wx:if="{{isEdit}}">
+                <image wx:if="{{good.commodityNum>0}}" class='item-operation-image' data-id="{{good.goodId}}" bindtap='subtractGood' src='/image/operation/subtract.png'></image>
+                <view wx:if="{{good.commodityNum>0}}" class='item-information-content big-text black bold' style='width:45rpx;'>{{good.commodityNum}}</view>
+                <image class='item-operation-image' data-id="{{good.goodId}}" bindtap='addGood' src='/image/operation/add2.png'></image>
+              </view>
+
+              <view class='item-row' wx:if="{{!isEdit}}">
+                <view style='width:70rpx;'></view>
+                <view class='item-data good-item-data'>
+                  <view class='item-data-num good-item-data-num'>{{good.commodityNum}}</view>
+                  <view class='item-data-title good-item-data-title'>商品数量</view>
+                </view>
+
+                <view style='width:20rpx;'></view>
+                <checkbox></checkbox>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+
+
+
+</view>

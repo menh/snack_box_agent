@@ -1,5 +1,6 @@
 // pages/logistics/shop/shop.js
 const app = getApp()
+const util = require('../../../utils/util.js')
 Page({
 
   /**
@@ -32,7 +33,6 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-
   },
 
   /**
@@ -76,14 +76,16 @@ Page({
       url: app.globalData.serverIp + 'selCategoryGood.do',
       data: {
         categoryType: '批发',
+        // categoryType: '零售',
         valid: '显示',
-        conditionParam: 'valid'
+        conditionParam: 'categoryType|valid'
       },
       method: 'POST',
       header: {
         "Content-Type": "application/x-www-form-urlencoded"
       },
       success: function(res) {
+        console.log(res)
         self.getCategoryCallback(self, res.data);
         wx.stopPullDownRefresh();
       },
@@ -95,16 +97,16 @@ Page({
   getCategoryCallback: function(self, categoryGoods) {
     categoryGoods = self.priceAdjustment(categoryGoods); //价格*100
 
-    // var cates = self.categorysFilter(categoryGoods);//从全部category中提取应该显示的
-    // var cates = self.initCommodityNum(cates);//从全部category中提取应该显示的
+    var cates = self.categorysFilter(categoryGoods);//从全部category中提取应该显示的
+    cates = self.initCommodityNum(cates);//初始化commodityNum
 
-    var cates = self.initCommodityNum(categoryGoods); //从全部category中提取应该显示的
+    // var cates = self.initCommodityNum(categoryGoods); //初始化commodityNum
 
 
     self.setData({
       cates: cates
     })
-    console.log('cates:',cates)
+    console.log('cates:', cates)
   },
 
 
@@ -226,7 +228,7 @@ Page({
   },
   submit: function(e) {
 
-    var url = '/pages/logistics/orderSure/orderSure?price='+this.data.goodCartData.price;
+    var url = '/pages/logistics/orderSure/orderSure?price=' + this.data.goodCartData.price;
     app.globalData.orderSureCates = this.data.cates;
     wx.navigateTo({
       url: url

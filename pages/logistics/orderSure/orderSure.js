@@ -163,7 +163,7 @@ Page({
           title: '下单成功',
           content: "稍后将会有工作人员与您确认配送信息",
           showCancel: false,
-          confirmText: '返回主页面',
+          confirmText: '返回首页',
           success: function (res) {
             wx.navigateBack({
               delta: 2

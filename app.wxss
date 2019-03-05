@@ -12,6 +12,55 @@ page {
   background-color: #f4f4f4;
 }
 
+
+
+.wholesale-price-title{
+  font-size: 23rpx;
+  color: rgb(152, 152, 152);
+}
+
+.wholesale-price-num{
+  font-size: 58rpx;
+  color: rgb(0, 0, 0);
+}
+.partition{
+  height: 30rpx;
+  line-height: 30rpx;
+  width: 690rpx;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 20rpx;
+  overflow: hidden;
+  color: rgb(200, 200, 200);
+}
+
+.wholesale-list-name{
+  width: 250rpx;
+  padding-left:50rpx;
+  font-size: 31rpx;
+  overflow: hidden;
+  color: rgb(128, 128, 128);
+
+}
+.wholesale-list-price{
+  width: 150rpx;
+  font-size: 31rpx;
+  color: rgb(128, 128, 128);
+
+}
+.wholesale-list-num{
+  width: 150rpx;
+  font-size: 31rpx;
+  color: rgb(128, 128, 128);
+
+}
+.wholesale-list-total{
+  width: 150rpx;
+  font-size: 31rpx;
+  color: rgb(128, 128, 128);
+
+}
+
 .block-text{
   width: fit-content;
   height: 50rpx;
@@ -41,7 +90,7 @@ page {
   flex-direction: row;
 }
 
-.category-item {
+.category-item{
   width: 750rpx;
   height: 100rpx;
   line-height: 100rpx;
@@ -231,9 +280,23 @@ page {
   border-width: 1rpx;
   display: flex;
 }
+.edit-input-item-operation2 {
+  width: 690rpx;
+  height: 79rpx;
+  line-height: 79rpx;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: white;
+  font-size: 34rpx;
+  border-color: rgb(105, 186, 201);
+  border-style:none none solid none;
+  border-width: 2rpx;
+  display: flex;
+  
+}
 
 
-.submit{
+.submit-view{
   height: 90rpx;
   line-height: 90rpx;
   width: 700rpx;
@@ -400,6 +463,7 @@ page {
   color: rgb(128, 128, 128);
 }
 
+
 .item-date {
   height: 100rpx;
   line-height: 100rpx;
@@ -442,7 +506,7 @@ page {
   color: rgb(38, 123, 217);
   font-weight: bold;
 }
-.category-item{
+.belong-category{
   width: 720rpx;
   border-radius: 10rpx;
   margin-left: auto;
@@ -452,6 +516,18 @@ page {
   padding-top: 15rpx;
   padding-bottom: 15rpx;
 }
+
+.order-price-size{
+  font-size:33rpx;
+}
+
+.memo{
+  width: 100%;
+  font-size: 26rpx;
+  text-align: center;
+  color: #808080
+}
+
 .black {
   color: #585858;
 }

@@ -1,8 +1,17 @@
 {
-  "pages":[
+  "pages": [
     "pages/hello/hello",
+    "pages/box/boxMark/boxMark",
+    "pages/bill/home/home",
+    "pages/box/boxAdmin/boxAdmin",
+    "pages/box/boxDetail/boxDetail",
+    "pages/box/boxStructNoEdit/boxStructNoEdit",
+    "pages/box/boxStruct/boxStruct",
+    "pages/box/boxEdit/boxEdit",
+    "pages/box/boxSearch/boxSearch",
     "pages/logistics/shop/shop",
     "pages/logistics/orderSure/orderSure",
+    "pages/logistics/wholesaleOrder/wholesaleOrder",
     "pages/apply/apply",
     "pages/logistics/home/home"
   ],
@@ -12,5 +21,31 @@
     "navigationBarTitleText": "宅宅快乐盒",
     "navigationBarTextStyle": "white",
     "enablePullDownRefresh": true
+  },
+  "tabBar": {
+    "color": "#808080",
+    "selectedColor": "#267BD9",
+    "backgroundColor": "#fff",
+    "borderStyle": "black",
+    "list": [
+      {
+        "iconPath": "image/icon/bill2.png",
+        "selectedIconPath": "image/icon/bill.png",
+        "pagePath": "pages/bill/home/home",
+        "text": "账单"
+      },
+      {
+        "iconPath": "image/icon/box3.png",
+        "selectedIconPath": "image/icon/box.png",
+        "pagePath": "pages/box/boxAdmin/boxAdmin",
+        "text": "盒子"
+      },
+      {
+        "iconPath": "image/icon/car2.png",
+        "selectedIconPath": "image/icon/car.png",
+        "pagePath": "pages/logistics/home/home",
+        "text": "进货"
+      }
+    ]
   }
 }

@@ -1,0 +1,21 @@
+/* pages/box/boxAdmin/boxAdmin.wxss */
+.my-category{
+  width: fit-content;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.my-pendingNum{
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 25rpx;
+  line-height: 40rpx;
+  background-color: red;
+  font-size: 23rpx;
+  font-weight: bold;
+  color: white;
+  text-align: center;
+}

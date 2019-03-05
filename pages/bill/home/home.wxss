@@ -1,0 +1,16 @@
+/* pages/bill/home/home.wxss */
+.my-category{
+  width: 750rpx;
+  border-radius: 0;
+  
+}
+
+.my-bill-cash{
+  font-size: 47rpx;
+}
+
+.my-bill-day{
+  text-align: left;
+  font-size: 30rpx;
+  padding-left: 20rpx;
+}

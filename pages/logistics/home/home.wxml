@@ -4,5 +4,69 @@
       <image class='operation-item-image' src='/image/icon/car.png'></image>
       <view class='operation-item-title'>进货</view>
     </view>
+<!-- 
+    <view class='operation-item' data-url='/pages/box/boxStructNoEdit/boxStructNoEdit?containerId={{containerId}}&getInterfaceName=selContainerGoodStructCount.do&title=全部商品' bindtap='navigate'>
+      <image class='operation-item-image' src='/image/operation/goodCart2.png'></image>
+      <view class='operation-item-title'>全部商品</view>
+    </view> -->
+
+    <view class='operation-item' data-url='/pages/box/boxStructNoEdit/boxStructNoEdit?containerId={{containerId}}&getInterfaceName=selContainerNextGoodStructCount.do&title=今日商品' bindtap='navigate'>
+      <image class='operation-item-image' src='/image/operation/goodCart2.png'></image>
+      <view class='operation-item-title'>今日商品</view>
+    </view>
   </view>
+
+  <view style='height:5rpx;'></view>
+  <view class='category'>
+    <view class="category-item {{type==='today'?'text-strong':''}}" data-type='today' catchtap='changeType'>今日订单</view>
+    <view class="category-item {{type==='past'?'text-strong':''}}" data-type='past' catchtap='changeType'>往日订单</view>
+  </view>
+
+  <view style='height:5rpx;'></view>
+  <view wx:for="{{wholesales}}" wx:key="{{index}}">
+    <view class='item  more-padding belong-category' data-url='/pages/logistics/wholesaleOrder/wholesaleOrder?wholesaleOrderId={{item.wholesaleOrder.wholesaleOrderId}}' bindtap='navigate'>
+      <view class='item-colume' style='width:100%'>
+        <view style='height:20rpx'></view>
+        <view class='wholesale-price-title center'>付款金额</view>
+        <view class='wholesale-price-num center'>￥{{item.wholesaleOrder.amount/100}}</view>
+        <view style='height:20rpx'></view>
+        <view class='item-row pagecss-row'>
+          <view class='item-information-content big-text pagecss-title'>交易单号</view>
+          <view class='item-information-content black  big-text'>{{item.wholesaleOrder.wholesaleOrderId}}</view>
+        </view>
+        <view class='item-row pagecss-row'>
+          <view class='item-information-content big-text pagecss-title'>付款时间</view>
+          <view class='item-information-content black  big-text'>{{item.wholesaleOrder.orderTimeDay}} {{item.wholesaleOrder.orderTimeTime}}</view>
+        </view>
+        <view class='item-row pagecss-row'>
+          <view class='item-information-content big-text pagecss-title'>联系方式</view>
+          <view class='item-information-content black  big-text'>{{item.agent.schoolName}} {{item.agent.dormName}}-{{item.agent.containerName}} {{item.agent.name}}
+            <label style='color:#267bd9' >{{item.agent.phone}}</label>
+          </view>
+        </view>
+        <view class='item-row pagecss-row'>
+          <view class='item-information-content big-text pagecss-title'>订单备注</view>
+          <view class='item-information-content black  big-text'>{{item.wholesaleOrder.mark}}</view>
+        </view>
+        <view class='item-row pagecss-row'>
+          <view class='item-information-content big-text pagecss-title'>商品数量</view>
+          <view class='item-information-content black  big-text'>{{item.wholesaleOrder.goodNum}}</view>
+        </view>
+        <view class='item-row pagecss-row'>
+          <view class='item-information-content big-text pagecss-title'>订单状态</view>
+          <view class='item-information-content black  big-text' style="color:{{item.wholesaleOrder.orderStatus === '未送达'?'red':'#267bd9'}}">{{item.wholesaleOrder.orderStatus}}</view>
+        </view>
+        <view class='partition center'>_______________________________________________________________________________</view>
+        <view style='height:15rpx'></view>
+        <view class='item-row'>
+          <view class='item-information-content black' style='margin-left:27rpx;font-size:31rpx;'>查看进货详情</view>
+          <view style='width:440rpx'></view>
+          <view class='item-information-content black bold' style='margin-left:27rpx;font-size:31rpx;'>></view>
+        </view>
+        <view style='height:10rpx'></view>
+      </view>
+    </view>
+  </view>
+
+
 </view>

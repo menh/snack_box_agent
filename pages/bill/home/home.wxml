@@ -1,0 +1,123 @@
+<view class='page'>
+  <view class='category my-category'>
+    <view class="category-item {{orderType==='today'?'text-strong':''}}" data-category='today' catchtap='tapCategory'>本日账单</view>
+    <view class="category-item {{orderType==='pastday'?'text-strong':''}}" data-category='pastday' catchtap='tapCategory'>往日账单</view>
+  </view>
+
+  <view style='height:5rpx'></view>
+  <view wx:if="{{orderType==='today'}}">
+
+    <view class='data'>
+      <view class='data-item'>
+        <view class='data-item-num text-strong'>￥{{info.amount/100}}</view>
+        <view class='data-item-title'>销售额</view>
+      </view>
+      <view class='data-item'>
+        <view class='data-item-num text-strong'>{{info.boxNum}}</view>
+        <view class='data-item-title'>活跃盒子</view>
+      </view>
+    </view>
+
+    <view style='height:5rpx'></view>
+
+    <view class='sort'>
+      <view class="sort-item {{sortOrders==='order'?'text-strong':''}}" data-value='order' catchtap='tapSort'>订单</view>
+      <view class="sort-item {{sortOrders==='good'?'text-strong':''}}" data-value='good' catchtap='tapSort'>商品</view>
+      <view class="sort-item {{sortOrders==='box'?'text-strong':''}}" data-value='box' catchtap='tapSort'>盒子</view>
+    </view>
+
+    <view style='height:5rpx'></view>
+
+    <view wx:if="{{sortOrders==='order'}}">
+      <view wx:for="{{orders}}" wx:key="{{index}}">
+        <view class='item more-padding belong-category'>
+          <view style='width:20rpx;'></view>
+          <image class='item-introduce-image' src='{{item.goodPic}}'></image>
+          <view style='width:20rpx;'></view>
+          <view class='item-information' style='width:300rpx;'>
+            <view class='item-information-content big-text black' style='overflow:hidden;text-align:left'>
+              <label class='bold'>{{item.boxBsn}}</label> {{item.goodName}}</view>
+            <view style='height:8rpx;'></view>
+            <view class='item-information-content big-text'>{{item.orderDateDay}} {{item.orderDateTime}}</view>
+          </view>
+          <view style='width:90rpx;'></view>
+          <view class='item-information' style='align-items:flex-end'>
+            <view class='item-information-content order-price-size black bold text-right'>{{item.price/100}}</view>
+            <view style='height:8rpx;'></view>
+            <view class='item-information-content big-text text-right'>{{item.openidCut}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+
+    <view wx:if="{{sortOrders==='good'}}">
+      <view wx:for="{{ordersGood}}" wx:key="{{index}}">
+        <view class='item more-padding belong-category'>
+          <view style='width:20rpx;'></view>
+          <image class='item-introduce-image' src='{{item.goodPic}}'></image>
+          <view style='width:20rpx;'></view>
+          <view class='item-information' style='width:250rpx;'>
+            <view class='item-information-content big-text black'>{{item.goodName}}</view>
+            <view style='height:8rpx;'></view>
+            <view class='item-information-content big-text'>￥{{item.price/100}}/{{item.goodUnit}}</view>
+          </view>
+          <view style='width:155rpx;'></view>
+          <view class='item-data2'>
+            <view class='item-data2-content black bold' style='font-size:35rpx'>{{item.sum}}</view>
+            <view class='item-data2-title'>销量</view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+
+
+    <view wx:if="{{sortOrders==='box'}}">
+      <view wx:for="{{ordersBox}}" wx:key="{{index}}">
+        <view class='item more-padding belong-category' data-url='/pages/box/boxDetail/boxDetail?boxId={{item.boxBsn}}' bindtap='navigate'>
+          <view style='width:20rpx;'></view>
+          <image class='item-introduce-image' src='/image/icon/box.png'></image>
+          <view style='width:20rpx;'></view>
+          <view class='item-information' style='width:175rpx;'>
+            <view class='item-information-content big-text black'>{{item.boxBsn}}</view>
+          </view>
+          <view class='item-data2' style='width:240rpx;'>
+            <view class='item-data2-content black bold' style='font-size:35rpx;width:150rpx;'>￥{{item.amount/100}}</view>
+            <view class='item-data2-title'>销售额</view>
+          </view>
+
+          <view class='item-data2' style='width:150rpx;'>
+            <view class='item-data2-content black bold' style='font-size:35rpx;width:60rpx;'>{{item.sum}}</view>
+            <view class='item-data2-title'>订单数</view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+
+  </view>
+
+
+  <view wx:if="{{orderType==='pastday'}}">
+
+    <view wx:for="{{bills}}" wx:key="{{index}}">
+      <view style='height:20rpx;'></view>
+      <view class='item-information-content big-text my-bill-day'>{{item.recordDateDay}}</view>
+      <view style='height:10rpx;'></view>
+      <view class='item more-padding'>
+        <view style='width:30rpx;'></view>
+        <view class='item-information' style='width:565rpx;'>
+          <view style='height:35rpx;'></view>
+          <view class='item-information-content big-text black my-bill-cash'>￥{{item.toCash}}</view>
+          <view style='height:35rpx;'></view>
+          <view class='item-information-content'>收款{{item.orderCount}}笔，服务费￥{{item.serviceCharge}}</view>
+          <view style='height:20rpx;'></view>
+        </view>
+        <view class='item-information'>
+          <view class='item-information-content big-text' style='font-size:33rpx;'>{{item.state}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

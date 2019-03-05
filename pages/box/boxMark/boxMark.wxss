@@ -1,0 +1,15 @@
+/* pages/box/boxMark/boxMark.wxss */
+
+.my-apply-day{
+  text-align: left;
+  font-size: 30rpx;
+  padding-left: 40rpx;
+}
+
+.my-apply-mark{
+  width: 670rpx;
+  margin-left: 40rpx;
+  margin-top: 10rpx;
+  margin-bottom: 10rpx;
+  word-break: break-all;
+}

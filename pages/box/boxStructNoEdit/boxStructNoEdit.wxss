@@ -1,0 +1,119 @@
+/* pages/box/boxStruct/boxStruct.wxss */
+
+.left {
+  width: 160rpx;
+  height: 100%;
+  background-color: #8fbff5;
+}
+
+.right {
+  width: 590rpx;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.right-scroll {
+  width: 100%;
+  height: 100%;
+}
+
+.right-bottom {
+  width: 560rpx;
+  height: 95rpx;
+  background-color: #f4f4f4;
+  position: absolute;
+  left: 180rpx;
+  bottom: 0rpx;
+  z-index: 0;
+}
+
+
+.right-bottom-button {
+  width: 270rpx;
+  height: 65rpx;
+  line-height: 65rpx;
+  background-color: rgb(105, 186, 201);
+  color:white ;
+  font-size: 28rpx;
+  font-weight: bold;
+  border-radius: 8rpx;
+  text-align: center;
+}
+
+.right-bottom-left {
+  position: absolute;
+  left: 0rpx;
+  bottom: 15rpx;
+  z-index: 1;
+}
+
+.right-bottom-right {
+  position: absolute;
+  left: 286rpx;
+  bottom: 15rpx;
+  z-index: 1;
+}
+
+.left-title {
+  width: 100%;
+  height: 90rpx;
+  line-height: 90rpx;
+  margin-bottom: 20rpx;
+  color: white;
+  text-align: center;
+  font-size: 28rpx;
+  font-weight: bold;
+}
+
+.good-item {
+  width: 560rpx;
+}
+
+.good-operation {
+  width: 230rpx;
+  justify-content: flex-end;
+}
+
+.good-item-data {
+  height: 100rpx;
+}
+
+.good-item-data-num {
+  font-size: 32rpx;
+  color: black;
+  text-align: right;
+  font-weight: bold;
+}
+
+.good-item-data-title {
+  font-size: 24rpx;
+}
+
+
+
+
+.fixed-left{
+  position: fixed;
+  left: 75rpx;
+  bottom: 130rpx;
+  z-index: 1;
+}
+.fixed-right{
+  position: fixed;
+  left: 580rpx;
+  bottom: 130rpx;
+  z-index: 1;
+}
+.botton-image {
+  width: 110rpx;
+  height: 110rpx;
+}
+.botton-text {
+  width: 110rpx;
+  height: 110rpx;
+  line-height: 110rpx;
+  color: white;
+  font-size: 27rpx;
+  font-weight: bold;
+  text-align: center;
+}
